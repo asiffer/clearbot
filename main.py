@@ -32,12 +32,12 @@ def download_logo(name: str, size: int = 512) -> ImageType:
     return Image.open(response.raw).convert("RGBA")
 
 
-def save_file(image: ImageType, path: str, name: str):
-    """Save image to path/name.png"""
+def save_file(image: ImageType, dest: str, name: str):
+    """Save image to dest/name.png"""
     if not name.endswith(f".{FORMAT}"):
         name += f".{FORMAT}"
 
-    file = os.path.join(path, name)
+    file = os.path.join(dest, name)
     image.save(file, format=FORMAT)
 
 
@@ -62,11 +62,11 @@ def cli():
         default=256,
     )
     parser.add_argument(
-        "-o",
-        "--output",
+        "-d",
+        "--destination",
         type=str,
         default="/tmp",
-        help="output directory",
+        help="destination directory",
     )
     parser.add_argument(
         "-v",
@@ -87,4 +87,4 @@ def cli():
         img = download_logo(name=domain, size=args.size)
         img.load()
         img = remove_white(img, threshold=args.threshold)
-        save_file(img, path=args.output, name=domain)
+        save_file(img, dest=args.destination, name=domain)
