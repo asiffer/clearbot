@@ -52,5 +52,6 @@ clearbot -t 250 github.com
 
 ## What's next?
 
+- Add tests
 - Colorize image
-- Print result in the terminal
+- Print result to the terminal
