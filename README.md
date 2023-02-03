@@ -26,7 +26,13 @@ You can pass several domains as well.
 clearbot github.com gitlab.com
 ```
 
-By default it will output `/tmp/github.com.png`. You can change the destination directory with the `-d` option.
+A file can also be used as input (one domain by line).
+
+```shell
+clearbot -f ./domains.txt
+```
+
+By default it will output `/tmp/<DOMAIN>.png`. You can change the destination directory with the `-d` option.
 
 ```shell
 clearbot -d . github.com
@@ -38,7 +44,7 @@ By default it outputs 512px png file (i.e. the greatest side has 512px). You can
 clearbot -s 128 github.com
 ```
 
-Finally sometimes we may want to remove the white background (by using transparency: alpha = 0). For this purpose, you can use the `-t` options that thresholds the whites (it must be between 0 and 255 as it is applied on a grayscale version of the image).
+Sometimes we may want to remove the white background (by using transparency: alpha = 0). For this purpose, you can use the `-t` options that thresholds the whites (it must be between 0 and 255 as it is applied on a grayscale version of the image).
 
 ```shell
 clearbot -t 250 github.com
@@ -46,5 +52,5 @@ clearbot -t 250 github.com
 
 ## What's next?
 
-- Use a file as input
 - Colorize image
+- Print result in the terminal
