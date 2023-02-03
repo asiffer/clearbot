@@ -38,7 +38,7 @@ By default it outputs 512px png file (i.e. the greatest side has 512px). You can
 clearbot -s 128 github.com
 ```
 
-Finally sometimes we may want to remove the white background (transparence). For this purpose, you can use the `-t` options that thresholds the whites (it must between 0 and 255 as it is applied on a grayscale version of the image).
+Finally sometimes we may want to remove the white background (by using transparency: alpha = 0). For this purpose, you can use the `-t` options that thresholds the whites (it must be between 0 and 255 as it is applied on a grayscale version of the image).
 
 ```shell
 clearbot -t 250 github.com

@@ -5,10 +5,10 @@ description = "Clearbit Logo API client"
 authors = ["Alban Siffer <alban.siffer@irisa.fr>"]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "main.py" }]
+packages = [{ include = "clearbot.py" }]
 
 [tool.poetry.scripts]
-clearbot = "main:cli"
+clearbot = "clearbot:cli"
 
 [tool.poetry.dependencies]
 python = "^3.10"
