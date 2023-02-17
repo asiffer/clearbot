@@ -34,6 +34,14 @@ def remove_white(image: ImageType, threshold: int) -> ImageType:
     return image
 
 
+def colorize(
+    image: ImageType,
+    white: str | int = "#FFFFFF",
+    black: str | int = "#000000",
+) -> ImageType:
+    return ImageOps.colorize(image=image, white=white, black=black)
+
+
 def download_logo(name: str, size: int = 512) -> Optional[ImageType]:
     """Download image from domain name"""
     response = requests.get(
@@ -142,6 +150,22 @@ def cli():
         help="remove pixels (alpha=0) with gray values higher than the threshold",
         required=False,
     )
+    parser.add_argument(
+        "-w",
+        "--colorize-white",
+        dest="colorize_white",
+        type=str,
+        help="Colorize the output image (focus on white color)",
+        required=False,
+    )
+    parser.add_argument(
+        "-b",
+        "--colorize-black",
+        dest="colorize_black",
+        type=str,
+        help="Colorize the output image (focus on black color)",
+        required=False,
+    )
 
     input_parser = parser.add_argument_group("input")
     input_parser.add_argument(
@@ -182,5 +206,17 @@ def cli():
         img.load()
         if args.threshold:
             img = remove_white(img, threshold=args.threshold)
+        alpha = img.getchannel("A")
+
+        bw = {}
+        if args.colorize_white:
+            bw["white"] = args.colorize_white
+        if args.colorize_black:
+            bw["black"] = args.colorize_black
+
+        if len(bw) > 0:
+            img = colorize(img.convert("L"), **bw)
+            img.putalpha(alpha)
+
         save_file(img, dest=args.destination, name=domain)
         done()
